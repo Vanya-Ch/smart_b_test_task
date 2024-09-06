@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux";
 import { useTypedSelector } from "../hooks/useTypedSelector";
 import { fetchUsers } from "../store/action-creators/user";
 
-// Інтерфейс для користувача
+
 interface User {
     id: number;
     name: string;
@@ -16,7 +16,7 @@ const UserList: React.FC = () => {
     const { users, error, loading } = useTypedSelector((state) => state.user);
     const dispatch = useDispatch();
 
-    // Стани для фільтрів у вигляді об'єкта
+
     const [filters, setFilters] = useState({
         name: '',
         username: '',
@@ -32,7 +32,7 @@ const UserList: React.FC = () => {
         dispatch(fetchUsers() as any);
     }, []);
 
-    // Обробник зміни фільтрів для всіх полів
+
     const handleFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setFilters({
             ...filters,
@@ -40,7 +40,7 @@ const UserList: React.FC = () => {
         });
     };
 
-    // Мемоізація фільтрації для уникнення зайвих рендерів
+
     const filteredUsers = useMemo(() => {
         return users.filter((user: User) =>
             user.name.toLowerCase().includes(filters.name.toLowerCase()) &&
